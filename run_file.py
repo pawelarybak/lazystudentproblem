@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from operations import *
 from evolutionary_algorithm import EvolutionaryAlgorithm
 import sys

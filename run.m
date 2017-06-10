@@ -13,7 +13,7 @@ fileID = fopen(filename,'w');
 fprintf(fileID, str);
 fclose(fileID);
 
-[status, result] = system(['run_file.py ' filename]);
+[status, result] = system(['./run_file.py ' filename]);
 
 k = strfind(result,'hof = ');
 
@@ -58,7 +58,7 @@ figure
 	hold on
 	bar(time,'stacked');
 	plot(-1:semesters+1, ones(1, semesters+3)*max_times(1))
-	title('Czas poœwiêcony na naukê')
+	title('Czas poï¿½wiï¿½cony na naukï¿½')
 	xlabel('Semestr')
 	axis([0.6 semesters+0.4 -Inf Inf])
 	print('./fig/1.png', '-dpng')
@@ -78,12 +78,12 @@ out_of_limits = dlmread('out_of_limits.csv', ' ');
 
 figure
 	plot(min_vals(:, 1), min_vals(:, 2))
-	title('Minimalna wartoœæ funkcji celu')
+	title('Minimalna wartoï¿½ï¿½ funkcji celu')
 	xlabel('Numer generacji')
 	print('./fig/3.png', '-dpng')
 	
 figure
 	plot(out_of_limits(:, 1), out_of_limits(:, 2))
-	title('Iloœæ osobników nie spe³niaj¹ca ograniczeñ')
+	title('Iloï¿½ï¿½ osobnikï¿½w nie speï¿½niajï¿½ca ograniczeï¿½')
 	xlabel('Numer generacji')
 	print('./fig/4.png', '-dpng')
