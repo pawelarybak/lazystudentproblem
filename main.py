@@ -33,4 +33,8 @@ if __name__ == '__main__':
     print('===========================')
     print('Final population:', pop)
     print('===========================')
-    print('Hall of fame:', hof.items[0], 'Value:', hof.value)
+    if not hof.items[0].out_of_limits:
+        print('Found solution within limits')
+    else:
+        print('Best solution out of limits')
+    print('Individual:', hof.items[0], 'Value:', hof.items[0].fitness.values)
