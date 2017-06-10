@@ -33,8 +33,9 @@ if __name__ == '__main__':
     print('===========================')
     print('Final population:', pop)
     print('===========================')
-    if not hof.items[0].out_of_limits:
+    best = min(hof.items, key=lambda x: x.values)
+    if not best.out_of_limits:
         print('Found solution within limits')
     else:
         print('Best solution out of limits')
-    print('Individual:', hof.items[0], 'Value:', hof.items[0].fitness.values)
+    print('Individual:', best, 'Value:', best.fitness.values)
