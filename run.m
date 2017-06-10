@@ -2,7 +2,8 @@ clc
 clear
 close all
 
-data2;
+% data2;
+[ subjects, semesters, max_times, min_points] = genRandomData(100, [1 10], [1 15]);
 
 filename = 'data.txt';
 
@@ -64,3 +65,17 @@ plot(-1:semesters+1, ones(1, semesters+3)*min_points)
 title('Zdobyte punkty')
 xlabel('Semestr')
 axis([0.6 semesters+0.4 0 Inf])
+
+min_vals = dlmread('min.csv', ' ');
+
+out_of_limits = dlmread('out_of_limits.csv', ' ');
+
+figure
+	plot(min_vals(:, 1), min_vals(:, 2))
+	title('Minimalna wartoœæ funkcji celu')
+	xlabel('Numer generacji')
+	
+figure
+	plot(out_of_limits(:, 1), out_of_limits(:, 2))
+	title('Iloœæ osobników nie spe³niaj¹ca ograniczeñ')
+	xlabel('Numer generacji')
