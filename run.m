@@ -3,7 +3,13 @@ clear
 close all
 
 % data2;
-[ subjects, semesters, max_times, min_points] = genRandomData(100, [1 10], [1 15], [5 10]);
+
+subject_size = 100;
+time_limits = [1 10];
+point_limits = [1 15];
+semester_limits = [5 10];
+
+[ subjects, semesters, max_times, min_points] = genRandomData(subject_size, time_limits, point_limits, semester_limits);
 
 filename = 'data.txt';
 
@@ -54,9 +60,13 @@ for i = 1:semesters
 	end
 end
 
-if(~exist('./fig/', 'dir'))
-	mkdir('./fig/');
+dir = ['./fig/' num2str(subject_size) '/'];
+if(~exist(dir, 'dir'))
+	mkdir(dir);
 end
+
+DateString = datestr(datetime, 'dd_HH_MM_SS_');
+path = [dir DateString];
 
 figure
 	hold on
@@ -65,7 +75,7 @@ figure
 	title('Czas po�wi�cony na nauk�')
 	xlabel('Semestr')
 	axis([0.6 semesters+0.4 -Inf Inf])
-	print('./fig/1.png', '-dpng')
+	print([path '1.png'], '-dpng')
 
 figure
 	hold on
@@ -74,7 +84,7 @@ figure
 	title('Zdobyte punkty')
 	xlabel('Semestr')
 	axis([0.6 semesters+0.4 0 Inf])
-	print('./fig/2.png', '-dpng')
+	print([path '2.png'], '-dpng')
 
 min_vals = dlmread('min.csv', ' ');
 
@@ -84,10 +94,10 @@ figure
 	plot(min_vals(:, 1), min_vals(:, 2))
 	title('Minimalna warto�� funkcji celu')
 	xlabel('Numer generacji')
-	print('./fig/3.png', '-dpng')
+	print([path '3.png'], '-dpng')
 	
 figure
 	plot(out_of_limits(:, 1), out_of_limits(:, 2))
 	title('Ilo�� osobnik�w nie spe�niaj�ca ogranicze�')
 	xlabel('Numer generacji')
-	print('./fig/4.png', '-dpng')
+	print([path '4.png'], '-dpng')

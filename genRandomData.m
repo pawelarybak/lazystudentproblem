@@ -11,7 +11,7 @@ function [ subjects, semesters, max_times, min_points] = genRandomData(no_subjec
 	time_sum =  sum(subjects(:, 1));
 	min_points = time_sum/4 + round((time_sum/2)*rand);
 	time_const = round((min_points/semesters)*ratio_avg);
-	time_const = time_const - rand*(time_const/4);
+	time_const = round(time_const - rand*(time_const/4));
 	max_times = ones(1, semesters)*time_const;
 end
 
