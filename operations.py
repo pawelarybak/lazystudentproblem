@@ -41,6 +41,11 @@ class EvolutionaryOperations(object):
         p1 = self.time_penalty(individual)
         p2 = self.points_penalty(individual)
 
+        if p1 != 0 or p2 != 0:
+            individual.out_of_limits = True
+        else:
+            individual.out_of_limits = False
+
         return time + p1 + p2,
 
     def mutate_individual(self, ind):

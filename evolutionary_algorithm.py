@@ -35,11 +35,15 @@ class EvolutionaryAlgorithm(object):
         pop = self.toolbox.population(n=self.population_size)
         hof = tools.ParetoFront()
 
-        stats = tools.Statistics(lambda ind: ind.fitness.values)
-        stats.register('avg', np.mean, axis=0)
-        stats.register('var', np.var, axis=0)
-        stats.register('min', np.min, axis=0)
-        stats.register('max', np.max, axis=0)
+        stats_fit = tools.Statistics(lambda ind: ind.fitness.values)
+        stats_fit.register('avg', np.mean, axis=0)
+        stats_fit.register('var', np.var, axis=0)
+        stats_fit.register('min', np.min, axis=0)
+        stats_fit.register('max', np.max, axis=0)
+        stats_out_of_limits = tools.Statistics(lambda ind: ind.out_of_limits)
+        stats_out_of_limits.register('number', np.sum)
+
+        stats = tools.MultiStatistics(fitness=stats_fit, limits=stats_out_of_limits)
 
         pop, log = algorithms.eaMuCommaLambda(pop, self.toolbox, mu, lam, self.cross_pb,
                                               self.mut_pb, ngen, stats, halloffame=hof)
