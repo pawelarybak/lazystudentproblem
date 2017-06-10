@@ -14,9 +14,15 @@ if __name__ == '__main__':
         f = open(sys.argv[1], 'r')
         exec(f.read())
         operations = EvolutionaryOperations(subjects, semesters, max_times, min_points)
-        algorithm = EvolutionaryAlgorithm(operations, 4, 5, 0.0, 0.7)
-        pop, log, hof = algorithm.run(5000)
+        algorithm = EvolutionaryAlgorithm(operations, 4, 40, 0.3, 0.7)
+        pop, log, hof = algorithm.run(1000)
         save_to_csv(log.chapters['fitness'], 'min', 'min.csv')
         save_to_csv(log.chapters['limits'], 'number', 'out_of_limits.csv')
-        print('hof = ', hof.items[0], ';')
-        print('value = ', hof.value[0], ';')
+        
+        best = min(hof.items, key=lambda x: x.fitness.values)
+        if not best.out_of_limits:
+            print('Found solution within limits')
+        else:
+            print('Best solution out of limits')
+
+        print('hof = ', best, ';')

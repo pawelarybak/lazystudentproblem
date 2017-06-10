@@ -3,7 +3,7 @@ clear
 close all
 
 % data2;
-[ subjects, semesters, max_times, min_points] = genRandomData(100, [1 10], [1 15]);
+[ subjects, semesters, max_times, min_points] = genRandomData(100, [1 10], [1 15], [5 10]);
 
 filename = 'data.txt';
 
@@ -15,7 +15,7 @@ fclose(fileID);
 
 [status, result] = system(['run_file.py ' filename]);
 
-k = strfind(result,'hof');
+k = strfind(result,'hof = ');
 
 eval(result(k:end));
 
@@ -51,20 +51,22 @@ for i = 1:semesters
 end
 
 figure
-hold on
-bar(time,'stacked');
-plot(-1:semesters+1, ones(1, semesters+3)*max_times(1))
-title('Czas poœwiêcony na naukê')
-xlabel('Semestr')
-axis([0.6 semesters+0.4 -Inf Inf])
+	hold on
+	bar(time,'stacked');
+	plot(-1:semesters+1, ones(1, semesters+3)*max_times(1))
+	title('Czas poœwiêcony na naukê')
+	xlabel('Semestr')
+	axis([0.6 semesters+0.4 -Inf Inf])
+	print('./fig/1.png', '-dpng')
 
 figure
-hold on
-plot(1:semesters, points, '-o');
-plot(-1:semesters+1, ones(1, semesters+3)*min_points)
-title('Zdobyte punkty')
-xlabel('Semestr')
-axis([0.6 semesters+0.4 0 Inf])
+	hold on
+	plot(1:semesters, points, '-o');
+	plot(-1:semesters+1, ones(1, semesters+3)*min_points)
+	title('Zdobyte punkty')
+	xlabel('Semestr')
+	axis([0.6 semesters+0.4 0 Inf])
+	print('./fig/2.png', '-dpng')
 
 min_vals = dlmread('min.csv', ' ');
 
@@ -74,8 +76,10 @@ figure
 	plot(min_vals(:, 1), min_vals(:, 2))
 	title('Minimalna wartoœæ funkcji celu')
 	xlabel('Numer generacji')
+	print('./fig/3.png', '-dpng')
 	
 figure
 	plot(out_of_limits(:, 1), out_of_limits(:, 2))
 	title('Iloœæ osobników nie spe³niaj¹ca ograniczeñ')
 	xlabel('Numer generacji')
+	print('./fig/4.png', '-dpng')

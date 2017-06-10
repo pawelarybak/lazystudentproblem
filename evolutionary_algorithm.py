@@ -30,8 +30,8 @@ class EvolutionaryAlgorithm(object):
 
     def run(self, ngen):
         lam = 100
-        mu = 20
-
+        mu = self.population_size
+        
         pop = self.toolbox.population(n=self.population_size)
         hof = tools.ParetoFront()
 
