@@ -26,8 +26,8 @@ if __name__ == '__main__':
     max_times = [20, 20]
     min_points = 20
     operations = EvolutionaryOperations(subjects, semesters, max_times, min_points)
-    algorithm = EvolutionaryAlgorithm(operations, 4, 5, 0.3, 0.7)
-    pop, log, hof = algorithm.run(100)
+    algorithm = EvolutionaryAlgorithm(operations, 4, 20, 0.3, 0.7)
+    pop, log, hof = algorithm.run(1000)
     save_to_csv(log.chapters['fitness'], 'min', 'min.csv')
     save_to_csv(log.chapters['limits'], 'number', 'out_of_limits.csv')
     print('===========================')

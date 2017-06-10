@@ -45,7 +45,7 @@ class EvolutionaryAlgorithm(object):
 
         stats = tools.MultiStatistics(fitness=stats_fit, limits=stats_out_of_limits)
 
-        pop, log = algorithms.eaMuCommaLambda(pop, self.toolbox, mu, lam, self.cross_pb,
+        pop, log = algorithms.eaMuPlusLambda(pop, self.toolbox, mu, lam, self.cross_pb,
                                               self.mut_pb, ngen, stats, halloffame=hof)
         hof.value = self.toolbox.evaluate(hof.items[0])
 
