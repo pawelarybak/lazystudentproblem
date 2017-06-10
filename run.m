@@ -13,7 +13,11 @@ fileID = fopen(filename,'w');
 fprintf(fileID, str);
 fclose(fileID);
 
-[status, result] = system(['./run_file.py ' filename]);
+if ispc()
+	[status, result] = system(['run_file.py ' filename]);
+else
+	[status, result] = system(['./run_file.py ' filename]);
+end
 
 k = strfind(result,'hof = ');
 
