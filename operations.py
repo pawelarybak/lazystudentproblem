@@ -23,6 +23,9 @@ class EvolutionaryOperations(object):
             if times > self.max_times[i - 1]:
                 penalty += (times - self.max_times[i - 1]) ** 2
 
+        if penalty != 0:
+            penalty += sum(self.max_times)
+        
         return penalty
 
     def points_penalty(self, individual):
