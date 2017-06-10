@@ -50,6 +50,10 @@ for i = 1:semesters
 	end
 end
 
+if(~exist('./fig/', 'dir'))
+	mkdir('./fig/');
+end
+
 figure
 	hold on
 	bar(time,'stacked');
